@@ -4,6 +4,7 @@ import Home from "./../Pages/Home/Home";
 import ListedBook from "./../Pages/ListedBook/ListedBook";
 import PageRead from "./../Pages/PageRead/PageRead";
 import ChildBook from "./../Pages/ChildBook/ChildBook";
+import BookDetails from "./../Components/BooksDetails/BookDetails";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -14,7 +15,8 @@ const Router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/",
+        path: "/bookDetails/:id",
+        element: <BookDetails />,
       },
       {
         path: "/listedBook",
