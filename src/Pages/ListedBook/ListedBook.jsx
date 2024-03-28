@@ -15,8 +15,15 @@ const ListedBook = () => {
   const [number, setNumber] = useState([]);
   const [year, setYear] = useState([]);
 
+  const [wishRat, setWishRat] = useState([]);
+  const [wishNumber, setWishNumber] = useState([]);
+  const [wishYear, setWishYear] = useState([]);
+
   useEffect(() => {
     setWishBook(getWishData());
+    setWishRat(getWishData());
+    setWishNumber(getWishData());
+    setWishYear(getWishData());
   }, []);
   useEffect(() => {
     setReadBook(getBookData());
@@ -26,6 +33,23 @@ const ListedBook = () => {
   }, []);
 
   // sorted validation start
+
+  const wishYr = () => {
+    const bookRating = wishYear.sort(
+      (a, b) => b.yearOfPublishing - a.yearOfPublishing
+    );
+    setWishBook(bookRating);
+  };
+
+  const wishNumbers = () => {
+    const bookRating = wishNumber.sort((a, b) => b.totalPages - a.totalPages);
+    setWishBook(bookRating);
+  };
+
+  const wishRating = () => {
+    const bookRating = wishRat.sort((a, b) => b.rating - a.rating);
+    setWishBook(bookRating);
+  };
 
   const handleRating = () => {
     const bookRating = rating.sort((a, b) => b.rating - a.rating);
@@ -58,6 +82,7 @@ const ListedBook = () => {
               <a
                 onClick={() => {
                   handleRating();
+                  wishRating();
                 }}
               >
                 Rating
@@ -67,6 +92,7 @@ const ListedBook = () => {
               <a
                 onClick={() => {
                   handleNumber();
+                  wishNumbers();
                 }}
               >
                 Number of Pages
@@ -76,6 +102,7 @@ const ListedBook = () => {
               <a
                 onClick={() => {
                   handleYear();
+                  wishYr();
                 }}
               >
                 Publisher year
