@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
+import ReadBook from "./../../Components/ReadBook/ReadBook";
+import WishBook from "../../Components/WishBook/WishBook";
 const ListedBook = () => {
   const [toggle, setToggle] = useState(0);
 
@@ -44,6 +46,7 @@ const ListedBook = () => {
           <span className="text-lg font-medium">Wishlist Books</span>
         </button>
       </div>
+      {toggle === 0 ? <ReadBook /> : <WishBook />}
     </div>
   );
 };
