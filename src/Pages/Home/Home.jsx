@@ -1,7 +1,11 @@
+import Banner from "../../Components/Banner/Banner";
+import Books from "../../Components/Books/Books";
+
 const Home = () => {
   return (
     <div>
-      <h1>This is a home page</h1>
+      <Banner />
+      <Books />
     </div>
   );
 };
