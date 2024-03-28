@@ -2,6 +2,11 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useBookData from "./../../Hook/useBookData";
 import { Toaster, toast } from "react-hot-toast";
+import {
+  getBookData,
+  saveToBook,
+} from "../../saveToBookStorage/saveToBookStorage";
+import { saveToWishData } from "../saveToWishData/saveToWishData";
 const BookDetails = () => {
   const { id } = useParams();
 
@@ -11,6 +16,20 @@ const BookDetails = () => {
     const single = bookData.find((book) => book.id === +id);
     setBookDetails(single);
   }, [bookData, id]);
+
+  const handleBook = (book) => {
+    saveToBook(book);
+  };
+
+  const handleWish = (wish) => {
+    const readData = getBookData();
+    const alreadyRead = readData.find((readId) => readId.id === wish.id);
+    if (!alreadyRead) {
+      saveToWishData(wish);
+    } else {
+      toast.error("already read");
+    }
+  };
 
   const {
     bookName,
@@ -78,10 +97,16 @@ const BookDetails = () => {
                 <p className="text-lg font-bold mr-4">{rating}.0</p>
               </div>
               <div className="mt-6">
-                <button className="text-lg mr-4 border-gray-400 font-semibold border px-6 py-3 rounded-md">
+                <button
+                  onClick={() => handleBook(bookDetails)}
+                  className="text-lg mr-4 border-gray-400 font-semibold border px-6 py-3 rounded-md"
+                >
                   Read
                 </button>
-                <button className="px-6 py-3 text-lg font-semibold rounded-md text-white bg-[#50B1C9]">
+                <button
+                  onClick={() => handleWish(bookDetails)}
+                  className="px-6 py-3 text-lg font-semibold rounded-md text-white bg-[#50B1C9]"
+                >
                   Wishlist
                 </button>
               </div>
