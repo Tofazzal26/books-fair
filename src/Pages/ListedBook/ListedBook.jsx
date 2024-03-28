@@ -10,12 +10,38 @@ const ListedBook = () => {
   const [readBook, setReadBook] = useState([]);
   const [wishBook, setWishBook] = useState([]);
 
+  // sorting state here
+  const [rating, setRating] = useState([]);
+  const [number, setNumber] = useState([]);
+  const [year, setYear] = useState([]);
+
   useEffect(() => {
     setWishBook(getWishData());
   }, []);
   useEffect(() => {
     setReadBook(getBookData());
+    setRating(getBookData());
+    setNumber(getBookData());
+    setYear(getBookData());
   }, []);
+
+  // sorted validation start
+
+  const handleRating = () => {
+    const bookRating = rating.sort((a, b) => b.rating - a.rating);
+    setReadBook(bookRating);
+  };
+
+  const handleNumber = () => {
+    const bookRating = number.sort((a, b) => b.totalPages - a.totalPages);
+    setReadBook(bookRating);
+  };
+  const handleYear = () => {
+    const bookRating = year.sort(
+      (a, b) => b.yearOfPublishing - a.yearOfPublishing
+    );
+    setReadBook(bookRating);
+  };
 
   return (
     <div className="container mx-auto">
@@ -29,13 +55,31 @@ const ListedBook = () => {
           </summary>
           <ul className="p-2 shadow menu dropdown-content text-[#656565] font-semibold z-[1] bg-base-100 rounded-box w-52">
             <li>
-              <a>Rating</a>
+              <a
+                onClick={() => {
+                  handleRating();
+                }}
+              >
+                Rating
+              </a>
             </li>
             <li>
-              <a>Number of Pages</a>
+              <a
+                onClick={() => {
+                  handleNumber();
+                }}
+              >
+                Number of Pages
+              </a>
             </li>
             <li>
-              <a>Publisher year</a>
+              <a
+                onClick={() => {
+                  handleYear();
+                }}
+              >
+                Publisher year
+              </a>
             </li>
           </ul>
         </details>
