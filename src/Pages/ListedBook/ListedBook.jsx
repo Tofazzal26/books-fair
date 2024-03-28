@@ -1,9 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import ReadBook from "./../../Components/ReadBook/ReadBook";
 import WishBook from "../../Components/WishBook/WishBook";
+import { getBookData } from "../../saveToBookStorage/saveToBookStorage";
+import { getWishData } from "../../Components/saveToWishData/saveToWishData";
 const ListedBook = () => {
   const [toggle, setToggle] = useState(0);
+
+  const [readBook, setReadBook] = useState([]);
+  const [wishBook, setWishBook] = useState([]);
+
+  useEffect(() => {
+    setWishBook(getWishData());
+  }, []);
+  useEffect(() => {
+    setReadBook(getBookData());
+  }, []);
 
   return (
     <div className="container mx-auto">
@@ -46,7 +58,11 @@ const ListedBook = () => {
           <span className="text-lg font-medium">Wishlist Books</span>
         </button>
       </div>
-      {toggle === 0 ? <ReadBook /> : <WishBook />}
+      {toggle === 0 ? (
+        <ReadBook readBook={readBook} />
+      ) : (
+        <WishBook wishBook={wishBook} />
+      )}
     </div>
   );
 };

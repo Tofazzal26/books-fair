@@ -1,7 +1,11 @@
-const WishBook = () => {
+import WishCard from "./WishCard";
+
+const WishBook = ({ wishBook }) => {
   return (
     <div>
-      <h1>Wish Book</h1>
+      {wishBook.map((Card) => (
+        <WishCard key={Card.id} Card={Card} />
+      ))}
     </div>
   );
 };

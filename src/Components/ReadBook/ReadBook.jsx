@@ -1,7 +1,11 @@
-const ReadBook = () => {
+import ReadBookCard from "./ReadBookCard";
+
+const ReadBook = ({ readBook }) => {
   return (
     <div>
-      <h1>Read Book</h1>
+      {readBook.map((bookCard) => (
+        <ReadBookCard key={bookCard.id} bookCard={bookCard} />
+      ))}
     </div>
   );
 };
